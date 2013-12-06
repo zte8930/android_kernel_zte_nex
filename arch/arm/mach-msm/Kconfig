@@ -2727,6 +2727,12 @@ config ZTE_ACPU_OVERCLOCK
 	default m
 	help
 	  supply a custom voltage and frequency to acpu overclock	  
+
+config CPU_OC
+	boolean "Overclocking to 1.5GHz"
+	default y
+	help
+	  Overclock for MSM8930 chipset. (Based on MSM8960 acpuclock table)
 	  
 config ZTE_LONGPOWER_FOR_HW_RESET
 	tristate "zte specify long power pressed for hw reset"
