@@ -53,13 +53,6 @@ config CFQ_GROUP_IOSCHED
 	---help---
 	  Enable group IO scheduling in CFQ.
 
-config IOSCHED_EXTRA
-        tristate "Extra schedulers"
-        default y
-        ---help---
-         Selecting this will enable SIO and ZEN I/O Schedulers.
-
-
 choice
 	prompt "Default I/O scheduler"
 	default DEFAULT_CFQ
