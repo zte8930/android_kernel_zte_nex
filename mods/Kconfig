@@ -33,8 +33,15 @@ config CPU_FREQ_GOV_EXTRA
           Enable smartassv2, asswax, and badass cpu governors
 
 config MSM8930_GPU_OC
-	bool "Overclock GPU"
+	bool "Overclock GPU (broken)"
+	default n
 	help
 	  Enable Overclocking of GPU to 450 MHz
+	  **Broken** Won't compile!!!
+
+config CPU_VOLTAGE_TABLE
+  bool "Enable CPU Voltage Table via sysfs for adjustements"
+  help
+    Krait User Votlage Control
 endmenu
 endif # BLOCK
