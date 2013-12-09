@@ -3,10 +3,7 @@ ZTE Awe Kernel (-rb3)
 
 Instructions for compiling:
 ----------------------------------------------
-* $ cd fs/
-* $ git clone git://github.com/rbheromax/exfat-nofuse exfat
-* $ git clone git://github.com/rbheromax/f2fs-3.4.y f2fs
-* $ cd ../
+* $ ./fs.sh
 * $ make nex_defconfig
 * $ make zImage
 
