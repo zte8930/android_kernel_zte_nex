@@ -1,8 +1,8 @@
 #
-# rbheromax's configuration
+# rbheromax and cooldudezach's configuration
 #
 menuconfig RBHEROMAX
-       bool "rbheromax's mods" if EXPERT
+       bool "rbheromax and cooldudezachs's mods" if EXPERT
        default y
        help
 	rbheromax's kernel modfications
@@ -28,19 +28,22 @@ config CPU_OC_14
 
 config CPU_OC_17
         boolean "Overclocking to 1.7GHz"
-        default y
+        depends on CPU_OC_14
+	default y
         help
           Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
 
 config CPU_OC_19
         boolean "Overclocking to 1.9GHz"
-        default y
+        depends on CPU_OC_17
+	default y
         help
           Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
 
 config CPU_OC_20
         boolean "Overclocking to 2.0GHz"
-        default n
+        depends on CPU_OC_19
+	default n
         help
           Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
 
@@ -60,5 +63,6 @@ config CPU_VOLTAGE_TABLE
   bool "Enable CPU Voltage Table via sysfs for adjustements"
   help
     Krait User Votlage Control
+
 endmenu
-endif # BLOCK
+endif # RBHEROMAX
