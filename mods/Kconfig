@@ -20,15 +20,15 @@ config IOSCHED_EXTRA
 endmenu
 
 menu "Speedhacks Options"
-config CPU_OC_14
-        boolean "Overclocking to 1.4GHz"
+config CPU_OC_15
+        boolean"Overclocking to 1.5GHz"
         default y
         help
           Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
 
 config CPU_OC_17
         boolean "Overclocking to 1.7GHz"
-        depends on CPU_OC_14
+        depends on CPU_OC_15
 	default y
         help
           Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
