@@ -65,4 +65,9 @@ config CPU_VOLTAGE_TABLE
     Krait User Votlage Control
 
 endmenu
+
+menu "Filesystems"
+source "fs/exfat/Kconfig"
+source "fs/f2fs/Kconfig"
+endmenu
 endif # RBHEROMAX
