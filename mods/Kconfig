@@ -1,0 +1,47 @@
+#
+# rbheromax's configuration
+#
+menuconfig RBHEROMAX
+       bool "rbheromax's mods" if EXPERT
+       default y
+       help
+	rbheromax's kernel modfications
+
+if RBHEROMAX
+
+menu "Block Schedulers"
+
+config IOSCHED_EXTRA
+        tristate "Extra schedulers"
+        default y
+        ---help---
+         Selecting this will enable SIO and ZEN I/O Schedulers.
+
+endmenu
+
+menu "Speedhacks Options"
+config CPU_OC
+        boolean "Overclocking to 1.7GHz"
+        default y
+        help
+          Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
+
+config CPU_FREQ_GOV_EXTRA
+        bool "Extra CPU Govs"
+        depends on CPU_FREQ
+        help
+          Enable smartassv2, asswax, and badass cpu governors
+
+config MSM8930_GPU_OC
+	bool "Overclock GPU (broken)"
+	default n
+	help
+	  Enable Overclocking of GPU to 450 MHz
+	  **Broken** Won't compile!!!
+
+config CPU_VOLTAGE_TABLE
+  bool "Enable CPU Voltage Table via sysfs for adjustements"
+  help
+    Krait User Votlage Control
+endmenu
+endif # BLOCK
