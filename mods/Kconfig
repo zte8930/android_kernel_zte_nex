@@ -20,9 +20,27 @@ config IOSCHED_EXTRA
 endmenu
 
 menu "Speedhacks Options"
-config CPU_OC
+config CPU_OC_14
+        boolean "Overclocking to 1.4GHz"
+        default y
+        help
+          Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
+
+config CPU_OC_17
         boolean "Overclocking to 1.7GHz"
         default y
+        help
+          Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
+
+config CPU_OC_19
+        boolean "Overclocking to 1.9GHz"
+        default y
+        help
+          Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
+
+config CPU_OC_20
+        boolean "Overclocking to 2.0GHz"
+        default n
         help
           Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
 
@@ -33,11 +51,10 @@ config CPU_FREQ_GOV_EXTRA
           Enable smartassv2, asswax, and badass cpu governors
 
 config MSM8930_GPU_OC
-	bool "Overclock GPU (broken)"
+	bool "Overclock GPU"
 	default n
 	help
 	  Enable Overclocking of GPU to 450 MHz
-	  **Broken** Won't compile!!!
 
 config CPU_VOLTAGE_TABLE
   bool "Enable CPU Voltage Table via sysfs for adjustements"
