@@ -86,3 +86,9 @@ obj-$(CONFIG_TOUCHSCREEN_FOCALTECH)	+= focaltech_ft5x0x.o zte_fw_info.o
 obj-$(CONFIG_TOUCHSCREEN_FOCALTECH_FW) += focaltech_ft5x0x_fw.o 
 obj-$(CONFIG_TOUCHSCREEN_CY8CTST241)	+= cyttsp_core.o cyttsp_i2c.o
 obj-$(CONFIG_TOUCHSCREEN_CYTTSP)	+= cyttsp3_core.o cyttsp3_i2c.o
+
+# for sweep2wake, leave 1st to avoid merge issues at the end of the file
+obj-$(CONFIG_TOUCHSCREEN_SWEEP2WAKE)		+= sweep2wake.o
+# for doubletap2wake, leave 1st to avoid merge issues at the end of the file
+obj-$(CONFIG_TOUCHSCREEN_DOUBLETAP2WAKE)	+= doubletap2wake.o
+
