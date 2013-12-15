@@ -58,7 +58,7 @@
  * towards the ideal frequency and slower after it has passed it. Similarly,
  * lowering the frequency towards the ideal frequency is faster than below it.
  */
-static unsigned int awake_ideal_freq = 594000;
+static unsigned int awake_ideal_freq = 702000;
 
 /*
  * The "ideal" frequency to use when suspended.
@@ -66,7 +66,7 @@ static unsigned int awake_ideal_freq = 594000;
  * that practically when sleep_ideal_freq==0 the awake_ideal_freq is used
  * also when suspended).
  */
-static unsigned int sleep_ideal_freq = 324000;
+static unsigned int sleep_ideal_freq = 486000;
 
 /*
  * Freqeuncy delta when ramping up above the ideal freqeuncy.
@@ -85,7 +85,7 @@ static unsigned int ramp_down_step = 0;
 /*
  * CPU freq will be increased if measured load > max_cpu_load;
  */
-static unsigned long max_cpu_load = 95;
+static unsigned long max_cpu_load = 90;
 
 /*
  * CPU freq will be decreased if measured load < min_cpu_load;
@@ -108,7 +108,7 @@ static unsigned long down_rate_us = 20000;
  * The frequency to set when waking up from sleep.
  * When sleep_ideal_freq=0 this will have no effect.
  */
-static unsigned int sleep_wakeup_freq = 1512000; // typo? -dm yup -gideonx
+static unsigned int sleep_wakeup_freq = 1350000; // typo? -dm yup -gideonx
 
 /*
  * Sampling rate, I highly recommend to leave it at 2.
