@@ -138,4 +138,13 @@ config TOUCHSCREEN_PREVENT_SLEEP
           This disables the sleep function of modified touchscreen drivers.
 endmenu    
 
+menu "Other options"
+config FORCE_FAST_CHARGE
+  bool "Force AC charge mode at will"
+  default y
+  help
+    A simple sysfs interface to force adapters that
+    are detected as USB to charge as AC.
+
+endmenu
 endif # RBHEROMAX
