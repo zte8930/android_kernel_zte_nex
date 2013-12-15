@@ -219,6 +219,18 @@ struct sx150x_platform_data msm8930_sx150x_data[] = {
 #define MSM_ION_HEAP_NUM	1
 #endif
 
+
+#ifdef CONFIG_CPU_FREQ_GOV_ONDEMAND_2_PHASE
+int set_two_phase_freq(int cpufreq);
+#endif
+
+#ifdef CONFIG_CPU_FREQ_GOV_BADASS_2_PHASE
+int set_two_phase_freq_badass(int cpufreq);
+#endif
+#ifdef CONFIG_CPU_FREQ_GOV_BADASS_3_PHASE
+int set_three_phase_freq_badass(int cpufreq);
+#endif
+
 /*
  * Support for FTM & RECOVERY mode by ZTE_BOOT_JIA_20120305, jia.jia
  * ZTE_PLATFORM
