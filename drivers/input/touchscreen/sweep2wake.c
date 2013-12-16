@@ -49,7 +49,11 @@ MODULE_LICENSE("GPLv2");
 
 /* Tuneables */
 #define S2W_DEBUG		0
+#ifdef CONFIG_SWEEP2WAKE_DEFAULT_ON
+#define S2W_DEFAULT		1
+#else
 #define S2W_DEFAULT		0
+#endif
 #define S2W_PWRKEY_DUR          60
 
 #ifdef CONFIG_MACH_MSM8974_HAMMERHEAD
@@ -76,14 +80,14 @@ static int touch_x = 0, touch_y = 0;
 static bool touch_x_called = false, touch_y_called = false;
 static bool scr_suspended = false, exec_count = true;
 static bool scr_on_touch = false, barrier[2] = {false, false};
-//static struct notifier_block s2w_lcd_notif;
+static struct notifier_block s2w_lcd_notif;
 static struct input_dev * sweep2wake_pwrdev;
 static DEFINE_MUTEX(pwrkeyworklock);
 static struct workqueue_struct *s2w_input_wq;
 static struct work_struct s2w_input_work;
 
 /* Read cmdline for s2w */
-/*
+
 static int __init read_s2w_cmdline(char *s2w)
 {
 	if (strcmp(s2w, "1") == 0) {
@@ -98,7 +102,7 @@ static int __init read_s2w_cmdline(char *s2w)
 	return 1;
 }
 __setup("s2w=", read_s2w_cmdline);
-*/
+
 /* PowerKey work func */
 static void sweep2wake_presspwr(struct work_struct * sweep2wake_presspwr_work) {
 	if (!mutex_trylock(&pwrkeyworklock))

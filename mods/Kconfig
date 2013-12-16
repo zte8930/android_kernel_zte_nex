@@ -11,11 +11,22 @@ if RBHEROMAX
 
 menu "Block Schedulers"
 
-config IOSCHED_EXTRA
-        tristate "Extra schedulers"
+config IOSCHED_SIO
+        tristate "Simple I/O scheduler"
         default y
         ---help---
-         Selecting this will enable SIO and ZEN I/O Schedulers.
+          The Simple I/O scheduler is an extremely simple scheduler,
+          based on noop and deadline, that relies on deadlines to
+          ensure fairness. The algorithm does not do any sorting but
+          basic merging, trying to keep a minimum overhead. It is aimed
+          mainly for aleatory access devices (eg: flash devices).
+
+config IOSCHED_ZEN
+        tristate "Zen I/O scheduler"
+        default y
+        ---help---
+          FCFS, dispatches are back-inserted, deadlines ensure fairness.
+          Should work best with devices where there is no travel delay.
 
 endmenu
 
@@ -46,6 +57,13 @@ config CPU_OC_20
 	default n
         help
           Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
+
+config CPU_OC_22
+        boolean "Overclocking to 2.2GHz"
+        depends on CPU_OC_20
+        default y
+        help
+          Overclock for MSM8930 chipset. (Based on MSM8974 acpuclock table)
 
 config CPU_FREQ_GOV_EXTRA
         bool "Extra CPU Govs"
@@ -126,16 +144,31 @@ config TOUCHSCREEN_SWEEP2WAKE
         select TOUCHSCREEN_PREVENT_SLEEP
         default n
 
+config SWEEP2WAKE_DEFAULT_ON
+	bool "S2W on by default"
+	depends on TOUCHSCREEN_SWEEP2WAKE
+	help
+          Enable S2W on boot for devices where it wont turn on  
+          through 3rd party apps.
+
 config TOUCHSCREEN_DOUBLETAP2WAKE
         tristate "DoubleTap2Wake for touchscreens"
         select TOUCHSCREEN_PREVENT_SLEEP
         default n
+
+config DOUBLETAP2WAKE_DEFAULT_ON
+        bool "DT2W on by default"
+        depends on TOUCHSCREEN_DOUBLETAP2WAKE
+	help
+	  Enable DT2W on boot for devices where it wont turn on
+	  through 3rd party apps.
 
 config TOUCHSCREEN_PREVENT_SLEEP
         bool "Inihibit sleep on modified touchscreen drivers"
         default n
         help
           This disables the sleep function of modified touchscreen drivers.
+
 endmenu    
 
 menu "Other options"

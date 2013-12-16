@@ -58,8 +58,11 @@ MODULE_LICENSE("GPLv2");
 
 /* Tuneables */
 #define DT2W_DEBUG		0
+#ifdef CONFIG_DOUBLETAP2WAKE_DEFAULT_ON
+#define DT2W_DEFAULT		1
+#else
 #define DT2W_DEFAULT		0
-
+#endif
 #define DT2W_PWRKEY_DUR		60
 #define DT2W_FEATHER		200
 #define DT2W_TIME		700
@@ -70,14 +73,14 @@ static cputime64_t tap_time_pre = 0;
 static int touch_x = 0, touch_y = 0, touch_nr = 0, x_pre = 0, y_pre = 0;
 static bool touch_x_called = false, touch_y_called = false, touch_cnt = true;
 static bool scr_suspended = false, exec_count = true;
-//static struct notifier_block dt2w_lcd_notif;
+static struct notifier_block dt2w_lcd_notif;
 static struct input_dev * doubletap2wake_pwrdev;
 static DEFINE_MUTEX(pwrkeyworklock);
 static struct workqueue_struct *dt2w_input_wq;
 static struct work_struct dt2w_input_work;
 
 /* Read cmdline for dt2w */
-/*
+
 static int __init read_dt2w_cmdline(char *dt2w)
 {
 	if (strcmp(dt2w, "1") == 0) {
@@ -92,7 +95,7 @@ static int __init read_dt2w_cmdline(char *dt2w)
 	return 1;
 }
 __setup("dt2w=", read_dt2w_cmdline);
-*/
+
 /* reset on finger release */
 static void doubletap2wake_reset(void) {
 	exec_count = true;
