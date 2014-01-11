@@ -1,3 +1,4 @@
+EXTRA_CFLAGS=-w
 #
 # Makefile for sensor chip drivers.
 #

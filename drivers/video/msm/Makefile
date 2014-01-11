@@ -187,6 +187,7 @@ obj-$(CONFIG_FB_MSM_LCDC_TRULY_HVGA_IPS3P2335) += lcdc_truly_ips3p2335.o
 
 obj-$(CONFIG_FB_MSM_TVOUT) += tvout_msm.o
 
+obj-$(CONFIG_FB_MSM_LCDC_WVGA_ARTHUR) += lcdc_panel_wvga_arthur.o
 
 ifeq ($(CONFIG_MHL_Sii8334),y)
 obj-$(CONFIG_MHL_Sii8334)    	  += mhl_sii8334/

@@ -1,5 +1,5 @@
 CFLAGS_scm.o :=$(call as-instr,.arch_extension sec,-DREQUIRES_SEC=1)
-
+EXTRA_CFLAGS=-w
 obj-y += io.o dma.o memory.o
 ifndef CONFIG_ARM_ARCH_TIMER
 obj-y += timer.o
@@ -231,6 +231,8 @@ obj-$(CONFIG_ARCH_FSM9XXX) += devices-fsm9xxx.o
 obj-$(CONFIG_ARCH_FSM9XXX) += clock-fsm9xxx.o clock-local.o acpuclock-fsm9xxx.o
 obj-$(CONFIG_ARCH_FSM9XXX) += dfe-fsm9xxx.o rfic-fsm9xxx.o
 obj-$(CONFIG_ARCH_FSM9XXX) += restart-fsm9xxx.o xo-fsm9xxx.o
+
+obj-$(CONFIG_MACH_ARTHUR) += board-zte-arthur.o devices-zte-arthur.o msm_vibrator.o
 
 obj-$(CONFIG_MSM_WATCHDOG) += msm_watchdog.o
 obj-$(CONFIG_MSM_WATCHDOG) += msm_watchdog_asm.o

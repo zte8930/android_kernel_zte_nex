@@ -1785,7 +1785,7 @@ void mdp4_overlay_borderfill_stage_up(struct mdp4_overlay_pipe *pipe)
 	mdp4_mixer_stage_up(pipe, 0);
 }
 
-void mdp4_overlay_borderfill_stage_down(struct mdp4_overlay_pipe *pipe)
+void mdp4_overlay_borderfill_stage_down(struct mdp4_overlay_pipe *pipe )
 {
 	struct mdp4_overlay_pipe *bspipe;
 	int ptype, pnum, pndx, mixer;

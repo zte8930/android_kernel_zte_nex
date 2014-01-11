@@ -2,123 +2,144 @@
 # rbheromax and cooldudezach's configuration
 #
 menuconfig RBHEROMAX
-       bool "rbheromax and cooldudezachs's mods" if EXPERT
-       default y
-       help
-	rbheromax's kernel modfications
+	bool "rbheromax and cooldudezachs's mods" if EXPERT
+	default y
+	help
+	  rbheromax's kernel modfications
 
 if RBHEROMAX
-
 menu "Block Schedulers"
-
 config IOSCHED_SIO
-        tristate "Simple I/O scheduler"
-        default y
-        ---help---
-          The Simple I/O scheduler is an extremely simple scheduler,
-          based on noop and deadline, that relies on deadlines to
-          ensure fairness. The algorithm does not do any sorting but
-          basic merging, trying to keep a minimum overhead. It is aimed
-          mainly for aleatory access devices (eg: flash devices).
+	tristate "Simple I/O scheduler"
+	default y
+	---help---
+	  The Simple I/O scheduler is an extremely simple scheduler,
+	  based on noop and deadline, that relies on deadlines to
+	  ensure fairness. The algorithm does not do any sorting but
+	  basic merging, trying to keep a minimum overhead. It is aimed
+	  mainly for aleatory access devices (eg: flash devices).
 
 config IOSCHED_ZEN
-        tristate "Zen I/O scheduler"
-        default y
-        ---help---
-          FCFS, dispatches are back-inserted, deadlines ensure fairness.
-          Should work best with devices where there is no travel delay.
+	tristate "Zen I/O scheduler"
+	default y
+	---help---
+	  FCFS, dispatches are back-inserted, deadlines ensure fairness.
+	  Should work best with devices where there is no travel delay.
 
 endmenu
 
-menu "Speedhacks Options"
+menu "Processor Options"
+if CONFIG_ARCH_MSM8930
+menu "Overclock CPU"
 config CPU_OC_15
-        boolean"Overclocking to 1.5GHz"
-        default y
-        help
-          Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
+	boolean"Overclocking to 1.5GHz"
+	default y
+	help
+	  Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
 
 config CPU_OC_17
-        boolean "Overclocking to 1.7GHz"
-        depends on CPU_OC_15
+	boolean "Overclocking to 1.7GHz"
+	depends on CPU_OC_15
 	default y
-        help
-          Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
+	help
+	  Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
 
 config CPU_OC_19
-        boolean "Overclocking to 1.9GHz"
-        depends on CPU_OC_17
-	default y
-        help
-          Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
+	boolean "Overclocking to 1.9GHz"
+	depends on CPU_OC_17
+	default n
+	help
+	  Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
 
 config CPU_OC_20
-        boolean "Overclocking to 2.0GHz"
-        depends on CPU_OC_19
+	boolean "Overclocking to 2.0GHz"
+	depends on CPU_OC_19
 	default n
-        help
-          Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
+	help
+	  Overclock for MSM8930 chipset. (Based on APQ8064 acpuclock table)
 
 config CPU_OC_22
-        boolean "Overclocking to 2.2GHz"
-        depends on CPU_OC_20
-        default y
-        help
-          Overclock for MSM8930 chipset. (Based on MSM8974 acpuclock table)
-
-config CPU_FREQ_GOV_EXTRA
-        bool "Extra CPU Govs"
-        depends on CPU_FREQ
-        help
-          Enable smartassv2, asswax, and badass cpu governors
-if CPU_FREQ_GOV_EXTRA
-menu "Badass CPU GOV options"
-config CPU_FREQ_GOV_BADASS_2_PHASE
-  tristate "'2-phase' power-efficiency badass algorithm"
-  depends on CPU_FREQ_GOV_EXTRA
-  help
-    '2-phase' - This driver adds a new algo to save power
-
-config CPU_FREQ_GOV_BADASS_2_PHASE_FREQ
-  int "'2-phase' badass frequency"
-  default 918000
-  depends on CPU_FREQ_GOV_EXTRA
-  depends on CPU_FREQ_GOV_BADASS_2_PHASE
-
-config CPU_FREQ_GOV_BADASS_3_PHASE
-  tristate "'3-phase' power-efficiency badass algorithm"
-  depends on CPU_FREQ_GOV_EXTRA
-  depends on CPU_FREQ_GOV_BADASS_2_PHASE
-  help
-    '3-phase' - This driver adds a new algo to save power
-
-config CPU_FREQ_GOV_BADASS_3_PHASE_FREQ
-  int "'3-phase' badass frequency"
-  default 1188000
-  depends on CPU_FREQ_GOV_EXTRA
-  depends on CPU_FREQ_GOV_BADASS_2_PHASE
-  depends on CPU_FREQ_GOV_BADASS_3_PHASE
-
-config CPU_FREQ_GOV_BADASS_GPU_CONTROL
-  tristate "'gpu_control' power-efficiency badass algorithm"
-  depends on CPU_FREQ_GOV_EXTRA
-  depends on CPU_FREQ_GOV_BADASS_2_PHASE
-  help
-    'gpu_control' - This driver adds a new algo to save power
-
-config CPU_FREQ_GOV_BADASS_LOWBAT_POWERSAVE
-  tristate "'lowbat_powersave' power-efficiency badass algorithm"
-  depends on CPU_FREQ_GOV_EXTRA
-  help
-    'lowbat_powersave' - This driver adds a new algo to save power
-
-config CPU_FREQ_GOV_BADASS_ALLOW_BYPASS
-  tristate "Allows bypassing phases"
-  depends on CPU_FREQ_GOV_EXTRA
-  depends on CPU_FREQ_GOV_BADASS_2_PHASE
- help
-    'allow_bypass' - This driver adds a bypass to the phases
+	boolean "Overclocking to 2.2GHz"
+	depends on CPU_OC_20
+	default y
+	help
+	  Overclock for MSM8930 chipset. (Based on MSM8974 acpuclock table)
 endmenu
 endif
+
+menu "Extra CPU Govs"
+config CPU_FREQ_GOV_BADASS
+	boolean "Enable Badass Governor"
+	depends on CPU_FREQ
+	default y
+
+	if CPU_FREQ_GOV_BADASS
+	menu "Badass CPU GOV options"
+	config CPU_FREQ_GOV_BADASS_2_PHASE
+		tristate "'2-phase' power-efficiency badass algorithm"
+		depends on CPU_FREQ_GOV_BADASS
+		help
+		  '2-phase' - This driver adds a new algo to save power
+
+	config CPU_FREQ_GOV_BADASS_2_PHASE_FREQ
+		int "'2-phase' badass frequency"
+		default 918000
+		depends on CPU_FREQ_GOV_BADASS
+		depends on CPU_FREQ_GOV_BADASS_2_PHASE
+
+	config CPU_FREQ_GOV_BADASS_3_PHASE
+		tristate "'3-phase' power-efficiency badass algorithm"
+		depends on CPU_FREQ_GOV_BADASS
+		depends on CPU_FREQ_GOV_BADASS_2_PHASE
+		help
+		  '3-phase' - This driver adds a new algo to save power
+
+	config CPU_FREQ_GOV_BADASS_3_PHASE_FREQ
+		int "'3-phase' badass frequency"
+		default 1188000
+		depends on CPU_FREQ_GOV_BADASS
+		depends on CPU_FREQ_GOV_BADASS_2_PHASE
+		depends on CPU_FREQ_GOV_BADASS_3_PHASE
+
+	config CPU_FREQ_GOV_BADASS_GPU_CONTROL
+		tristate "'gpu_control' power-efficiency badass algorithm"
+		depends on CPU_FREQ_GOV_BADASS
+		depends on CPU_FREQ_GOV_BADASS_2_PHASE
+		help
+		  'gpu_control' - This driver adds a new algo to save power
+
+	config CPU_FREQ_GOV_BADASS_LOWBAT_POWERSAVE
+		tristate "'lowbat_powersave' power-efficiency badass algorithm"
+		depends on CPU_FREQ_GOV_BADASS
+		help
+		  'lowbat_powersave' - This driver adds a new algo to save power
+
+	config CPU_FREQ_GOV_BADASS_ALLOW_BYPASS
+		tristate "Allows bypassing phases"
+		depends on CPU_FREQ_GOV_BADASS
+		depends on CPU_FREQ_GOV_BADASS_2_PHASE
+		help
+		  'allow_bypass' - This driver adds a bypass to the phases
+	endmenu
+	endif
+
+config CPU_FREQ_GOV_SMARTASS2
+	boolean "Enable Smartassv2 Governor"
+	depends on CPU_FREQ
+	default y
+
+config CPU_FREQ_GOV_WHEATLEY
+	boolean "Enable Wheatley Governor"
+	depends on CPU_FREQ
+	default y
+
+config CPU_FREQ_GOV_ASSWAX
+	boolean "Enable Asswax Governor"
+	depends on CPU_FREQ
+	default y
+endmenu
+
+if CONFIG_MACH_MSM8930
 config MSM8930_GPU_OC
 	bool "Overclock GPU"
 	default n
@@ -126,10 +147,10 @@ config MSM8930_GPU_OC
 	  Enable Overclocking of GPU to 450 MHz
 
 config CPU_VOLTAGE_TABLE
-  bool "Enable CPU Voltage Table via sysfs for adjustements"
-  help
-    Krait User Votlage Control
-
+	bool "Enable CPU Voltage Table via sysfs for adjustements"
+	help
+	  Krait User Voltage Control
+endif
 endmenu
 
 menu "Filesystems"
@@ -138,46 +159,44 @@ source "fs/f2fs/Kconfig"
 endmenu
 
 menu "Touchscreen Mods"
-
 config TOUCHSCREEN_SWEEP2WAKE
-        tristate "Sweep2Wake for touchscreens"
-        select TOUCHSCREEN_PREVENT_SLEEP
-        default n
+	tristate "Sweep2Wake for touchscreens"
+	select TOUCHSCREEN_PREVENT_SLEEP
+	default n
 
 config SWEEP2WAKE_DEFAULT_ON
 	bool "S2W on by default"
 	depends on TOUCHSCREEN_SWEEP2WAKE
 	help
-          Enable S2W on boot for devices where it wont turn on  
-          through 3rd party apps.
+	  Enable S2W on boot for devices where it wont turn on  
+	  through 3rd party apps.
 
 config TOUCHSCREEN_DOUBLETAP2WAKE
-        tristate "DoubleTap2Wake for touchscreens"
-        select TOUCHSCREEN_PREVENT_SLEEP
-        default n
+	tristate "DoubleTap2Wake for touchscreens"
+	select TOUCHSCREEN_PREVENT_SLEEP
+	default n
 
 config DOUBLETAP2WAKE_DEFAULT_ON
-        bool "DT2W on by default"
-        depends on TOUCHSCREEN_DOUBLETAP2WAKE
+	bool "DT2W on by default"
+	depends on TOUCHSCREEN_DOUBLETAP2WAKE
 	help
 	  Enable DT2W on boot for devices where it wont turn on
 	  through 3rd party apps.
 
 config TOUCHSCREEN_PREVENT_SLEEP
-        bool "Inihibit sleep on modified touchscreen drivers"
-        default n
-        help
-          This disables the sleep function of modified touchscreen drivers.
-
+	bool "Inihibit sleep on modified touchscreen drivers"
+	default n
+	help
+	  This disables the sleep function of modified touchscreen drivers.
 endmenu    
 
 menu "Other options"
 config FORCE_FAST_CHARGE
-  bool "Force AC charge mode at will"
-  default y
-  help
-    A simple sysfs interface to force adapters that
-    are detected as USB to charge as AC.
+	bool "Force AC charge mode at will"
+	default y
+	help
+	  A simple sysfs interface to force adapters that
+	  are detected as USB to charge as AC.
 
 endmenu
 endif # RBHEROMAX
